@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
+using System.Net.Sockets;
 
 namespace Cliente
 {
@@ -54,7 +55,17 @@ namespace Cliente
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
+            IPEndPoint end = new IPEndPoint(IPAddress.Parse(IpServidor),Port);
 
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            byte[] messages = new byte[1024];
+
+            socket.Connect(end);
+
+            messages = Encoding.UTF8.GetBytes("Hola, vine a buscar un cliente .....");
+
+            socket.Send(messages);
         }
 
         private void BtnNuevo_Click(object sender, RoutedEventArgs e)
