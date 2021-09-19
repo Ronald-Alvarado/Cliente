@@ -76,7 +76,19 @@ namespace Cliente
 
                 bytemessages = socket.Receive(messages);
 
-                MessageBox.Show(Encoding.UTF8.GetString(messages,0,bytemessages));
+                String mensajeRecibido = Encoding.UTF8.GetString(messages, 0, bytemessages);
+
+                MessageBox.Show(mensajeRecibido);
+    
+
+                if (mensajeRecibido.Contains("aceptada"))
+                {
+                    MainWindow main = new MainWindow(ServerIpTextBox.Text,Convert.ToInt32(PortTextBox.Text));
+                    main.Show();
+                    this.Close();
+                }
+
+                //25.4.175.48
 
                 socket.Shutdown(SocketShutdown.Both);
 

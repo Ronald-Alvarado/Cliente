@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net;
 
 namespace Cliente
 {
@@ -20,6 +21,18 @@ namespace Cliente
     /// </summary>
     public partial class MainWindow : Window
     {
+        string IpServidor = "";
+        int Port = 0;
+       
+
+        public MainWindow(string ServerIp, int port)
+        {
+            InitializeComponent();
+            IpServidor = ServerIp;
+            Port = port;
+         
+        }
+
         public MainWindow()
         {
             InitializeComponent();
