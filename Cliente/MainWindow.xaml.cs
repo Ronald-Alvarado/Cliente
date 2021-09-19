@@ -26,14 +26,14 @@ namespace Cliente
     {
         string IpServidor = "";
         int Port = 0;
-       
+
 
         public MainWindow(string ServerIp, int port)
         {
             InitializeComponent();
             IpServidor = ServerIp;
             Port = port;
-         
+
         }
 
         public Citas LlenaClase()
@@ -84,13 +84,13 @@ namespace Cliente
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
             Citas cita = new Citas();
-            IPEndPoint end = new IPEndPoint(IPAddress.Parse(IpServidor),Port);
+            IPEndPoint endP = new IPEndPoint(IPAddress.Parse(IpServidor), Port);
 
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             byte[] messages = new byte[1024];
 
-            socket.Connect(end);
+            socket.Connect(endP);
 
             messages = Encoding.UTF8.GetBytes("Hola, vine a buscar un cliente .....");
 
@@ -121,7 +121,7 @@ namespace Cliente
 
                 LlenaCampo(cita);
             }
-            
+
         }
 
         private void BtnNuevo_Click(object sender, RoutedEventArgs e)
@@ -135,9 +135,53 @@ namespace Cliente
             HoraCitaTextBox.Text = String.Empty;
         }
 
+        public void Modificar(int id){
+            
+        }
+
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
         {
+            Citas citas;
 
+            bool paso = false;
+            //Validar
+            citas = LlenaClase();
+
+            if(Convert.ToInt32(IdTextBox.Text) == 0)
+            {
+                IPEndPoint endP = new IPEndPoint(IPAddress.Parse(IpServidor), Port);
+
+                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+                byte[] messages = new byte[1024];
+
+                socket.Connect(endP);
+
+                messages = Encoding.UTF8.GetBytes("Hola, vine a guardar un cliente .....");
+
+                socket.Send(messages);
+
+                int bytemessages = 0;
+                messages = new byte[1024];
+                bytemessages = socket.Receive(messages);
+                String mensajeRecibido = Encoding.UTF8.GetString(messages, 0, bytemessages);
+                if (mensajeRecibido.Contains("aceptada"))
+                {
+                    string output = JsonConvert.SerializeObject(citas);
+                    messages = Encoding.UTF8.GetBytes(output);
+                    bytemessages = socket.Send(messages);
+                }                
+            }
+
+            if (IdTextBox.Text != "0")
+            {
+                if (citas != null)
+                {
+                    Modificar(Convert.ToInt32(IdTextBox.Text));
+                }
+                
+            }
+            
         }
 
         private void BtnEliminar_Click(object sender, RoutedEventArgs e)
