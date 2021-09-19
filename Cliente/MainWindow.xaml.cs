@@ -24,5 +24,25 @@ namespace Cliente
         {
             InitializeComponent();
         }
+
+        private void btnBuscar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnNuevo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Cliente.Entidades
         public string Telefono { get; set; }
         public string Direccion { get; set; }
         public DateTime FechaCita { get; set; }
-        public string Hora { get; set; }
+        public string HoraCita { get; set; }
 
 
         public Citas()
@@ -23,7 +23,7 @@ namespace Cliente.Entidades
             Telefono = string.Empty;
             Direccion = string.Empty;
             FechaCita = DateTime.Now;
-            Hora = string.Empty;
+            HoraCita = string.Empty;
         }
     }
 }
