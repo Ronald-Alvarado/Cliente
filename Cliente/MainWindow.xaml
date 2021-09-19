@@ -6,34 +6,34 @@
         xmlns:local="clr-namespace:Cliente"
         mc:Ignorable="d"
         Title="MainWindow" Height="530" Width="390">
-    <Grid x:Name="RegistroP" Background="Lime">
+    <Grid x:Name="RegistroP">
         <Grid.RowDefinitions>
             <RowDefinition Height="500"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="33,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Nombres:" HorizontalAlignment="Left" Margin="33,70,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Apellidos:" HorizontalAlignment="Left" Margin="33,130,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Teléfono:" HorizontalAlignment="Left" Margin="33,190,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Dirección:" HorizontalAlignment="Left" Margin="33,250,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="FechaCita:" HorizontalAlignment="Left" Margin="33,310,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="HoraCita:" HorizontalAlignment="Left" Margin="33,370,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="33,10,0,0" VerticalAlignment="Top"  FontSize="16"/>
+        <Label Content="Nombres:" HorizontalAlignment="Left" Margin="33,70,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Apellidos:" HorizontalAlignment="Left" Margin="33,130,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Teléfono:" HorizontalAlignment="Left" Margin="33,190,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Dirección:" HorizontalAlignment="Left" Margin="33,250,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="FechaCita:" HorizontalAlignment="Left" Margin="33,310,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="HoraCita:" HorizontalAlignment="Left" Margin="33,370,0,0" VerticalAlignment="Top" FontSize="16"/>
 
-        <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Text="0" Margin="33,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" FontSize="16"/>
-        <TextBox x:Name="NombreTextBox" HorizontalAlignment="Left" Margin="33,100,0,0"  Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
-        <TextBox x:Name="ApellidoTextBox" HorizontalAlignment="Left" Margin="33,160,0,0"  Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
-        <TextBox x:Name="TelefonoTextBox" HorizontalAlignment="Left" Margin="33,220,0,0"  Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
-        <TextBox x:Name="DireccionTextBox" HorizontalAlignment="Left" Margin="33,280,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
-        <DatePicker x:Name="FechaCitaTextBox" HorizontalAlignment="Left" Margin="33,340,0,0" VerticalAlignment="Top" Width="300"/>
-        <TextBox x:Name="HoraCitaTextBox" HorizontalAlignment="Left" Margin="33,400,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
+        <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Text="0" Margin="33,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" FontSize="14"/>
+        <TextBox x:Name="NombreTextBox" HorizontalAlignment="Left" Margin="33,100,0,0"  Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" FontSize="14"/>
+        <TextBox x:Name="ApellidoTextBox" HorizontalAlignment="Left" Margin="33,160,0,0"  Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" FontSize="14"/>
+        <TextBox x:Name="TelefonoTextBox" HorizontalAlignment="Left" Margin="33,220,0,0"  Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" FontSize="14"/>
+        <TextBox x:Name="DireccionTextBox" HorizontalAlignment="Left" Margin="33,280,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" FontSize="14"/>
+        <DatePicker x:Name="FechaCitaTextBox" HorizontalAlignment="Left" Margin="33,340,0,0" VerticalAlignment="Top" Width="300" FontSize="13"/>
+        <TextBox x:Name="HoraCitaTextBox" HorizontalAlignment="Left" Margin="33,400,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" FontSize="14"/>
 
         <Button x:Name="btnBuscar" Content="Buscar" HorizontalAlignment="Left" Margin="200,40,0,0" VerticalAlignment="Top" Height="25" Width="132" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="center" OpacityMask="Black" BorderBrush="Black" Click="btnBuscar_Click"/>
 
-        <Button x:Name="BtnNuevo" Content="Nuevo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,430,0,0" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="Black" Click="BtnNuevo_Click"/>
+        <Button x:Name="BtnNuevo" Content="Nuevo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,450,0,0" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="Black" Click="BtnNuevo_Click"/>
 
-        <Button x:Name="BtnGuardar" Content="Guardar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="138,430,0,0" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="Black" Click="BtnGuardar_Click"/>
+        <Button x:Name="BtnGuardar" Content="Guardar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="138,450,0,0" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="Black" Click="BtnGuardar_Click"/>
 
-        <Button x:Name="BtnEliminar" Content="Eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="243,430,0,0" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="Black" Click="BtnEliminar_Click"/>
+        <Button x:Name="BtnEliminar" Content="Eliminar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="243,450,0,0" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" BorderBrush="Black" Click="BtnEliminar_Click"/>
     </Grid>
 </Window>

@@ -23,6 +23,20 @@ namespace Cliente
         public MainWindow()
         {
             InitializeComponent();
+            CenterWindowOnScreen();
+
+            IdTextBox.Text = "0";
+            FechaCitaTextBox.SelectedDate = DateTime.Now;
+        }
+
+        private void CenterWindowOnScreen()
+        {
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double windowWidth = this.Width;
+            double windowHeight = this.Height;
+            this.Left = (screenWidth / 2) - (windowWidth / 2);
+            this.Top = (screenHeight / 2) - (windowHeight / 2);
         }
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
@@ -32,7 +46,13 @@ namespace Cliente
 
         private void BtnNuevo_Click(object sender, RoutedEventArgs e)
         {
-
+            IdTextBox.Text = "0";
+            NombreTextBox.Text = String.Empty;
+            ApellidoTextBox.Text = String.Empty;
+            TelefonoTextBox.Text = String.Empty;
+            DireccionTextBox.Text = String.Empty;
+            FechaCitaTextBox.SelectedDate = DateTime.Now;
+            HoraCitaTextBox.Text = String.Empty;
         }
 
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
