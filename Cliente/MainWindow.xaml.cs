@@ -226,7 +226,42 @@ namespace Cliente
 
         private void BtnEliminar_Click(object sender, RoutedEventArgs e)
         {
+            Citas cita = new Citas();
+            cita = LlenaClase();
 
+            IPEndPoint endP = new IPEndPoint(IPAddress.Parse(IpServidor), Port);
+
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            byte[] messages = new byte[1024];
+
+            socket.Connect(endP);
+
+            messages = Encoding.UTF8.GetBytes("Eliminar");
+
+            socket.Send(messages);
+
+            int bytemessages = 0;
+            messages = new byte[1024];
+            bytemessages = socket.Receive(messages);
+
+            string mensajeRecibido = Encoding.UTF8.GetString(messages, 0, bytemessages);
+
+            if (mensajeRecibido.Contains("aceptada"))
+            {
+                //Receive
+
+                string output = JsonConvert.SerializeObject(cita);
+                messages = Encoding.UTF8.GetBytes(output);
+                bytemessages = socket.Send(messages);
+
+                int bytes = 0;
+                messages = new byte[1024];
+                bytes = socket.Receive(messages);
+
+                string mensaje = Encoding.UTF8.GetString(messages, 0, bytes);
+                MessageBox.Show(mensaje, "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }
