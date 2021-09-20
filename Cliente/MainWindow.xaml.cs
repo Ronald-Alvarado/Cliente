@@ -93,7 +93,7 @@ namespace Cliente
 
             string mensajeRecibido = Encoding.UTF8.GetString(messages, 0, bytemessages);
 
-           if (mensajeRecibido.Contains("aceptada"))
+            if (mensajeRecibido.Contains("aceptada"))
             {
                 messages = new byte[1024];
                 messages = Encoding.UTF8.GetBytes(IdTextBox.Text);
@@ -109,19 +109,23 @@ namespace Cliente
 
                 dato += Encoding.UTF8.GetString(messages, 0, Byte);
 
-                cita = JsonConvert.DeserializeObject<Citas>(dato);
+                if (dato != null)
+                {
+                    cita = JsonConvert.DeserializeObject<Citas>(dato);
 
-                LlenaCampo(cita);
+                    LlenaCampo(cita);
 
-                socket.Shutdown(SocketShutdown.Both);
-                socket.Close();
-
-                IdTextBox.IsEnabled = false;
+                    IdTextBox.IsEnabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("No se ha encontrado dicha cita","ERROR");
+                    IdTextBox.Focus();
+                }
             }
-          
         }
 
-        private void BtnNuevo_Click(object sender, RoutedEventArgs e)
+        public void Nuevo()
         {
             IdTextBox.Text = "0";
             NombreTextBox.Text = String.Empty;
@@ -130,8 +134,13 @@ namespace Cliente
             DireccionTextBox.Text = String.Empty;
             FechaCitaTextBox.SelectedDate = DateTime.Now;
             HoraCitaTextBox.Text = String.Empty;
-
             IdTextBox.IsEnabled = true;
+        }
+
+        private void BtnNuevo_Click(object sender, RoutedEventArgs e)
+        {
+            Nuevo();
+           
         }
 
         public void Modificar()
@@ -143,16 +152,16 @@ namespace Cliente
 
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            byte[] messages = new byte[1024];
+            byte[] messages = new byte[10240];
 
             socket.Connect(endP);
 
-            messages = Encoding.UTF8.GetBytes("Guardar");
+            messages = Encoding.UTF8.GetBytes("Modificar");
 
             socket.Send(messages);
 
             int bytemessages = 0;
-            messages = new byte[1024];
+            messages = new byte[10240];
             bytemessages = socket.Receive(messages);
             String mensajeRecibido = Encoding.UTF8.GetString(messages, 0, bytemessages);
             if (mensajeRecibido.Contains("aceptada"))
@@ -162,12 +171,13 @@ namespace Cliente
                 bytemessages = socket.Send(messages);
 
                 int bytes = 0;
-                messages = new byte[1024];
+                messages = new byte[10240];
                 bytes = socket.Receive(messages);
 
                 string mensaje = Encoding.UTF8.GetString(messages, 0, bytes);
                 MessageBox.Show(mensaje, "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                Nuevo();
             }
         }
 
@@ -175,7 +185,6 @@ namespace Cliente
         {
             Citas citas;
 
-            bool paso = false;
             //Validar
             citas = LlenaClase();
 
@@ -185,7 +194,7 @@ namespace Cliente
 
                 Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-                byte[] messages = new byte[1024];
+                byte[] messages = new byte[10240];
 
                 socket.Connect(endP);
 
@@ -194,7 +203,7 @@ namespace Cliente
                 socket.Send(messages);
 
                 int bytemessages = 0;
-                messages = new byte[1024];
+                messages = new byte[10240];
                 bytemessages = socket.Receive(messages);
                 String mensajeRecibido = Encoding.UTF8.GetString(messages, 0, bytemessages);
                 if (mensajeRecibido.Contains("aceptada"))
@@ -204,12 +213,13 @@ namespace Cliente
                     bytemessages = socket.Send(messages);
 
                     int bytes = 0;
-                    messages = new byte[1024];
+                    messages = new byte[10240];
                     bytes = socket.Receive(messages);
 
                     string mensaje = Encoding.UTF8.GetString(messages, 0, bytes);
                     MessageBox.Show(mensaje, "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                    Nuevo();
                 }                
             }
 
@@ -261,7 +271,23 @@ namespace Cliente
 
                 string mensaje = Encoding.UTF8.GetString(messages, 0, bytes);
                 MessageBox.Show(mensaje, "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                Nuevo();
             }
+        }
+
+        private void Close(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            IPEndPoint endP = new IPEndPoint(IPAddress.Parse(IpServidor), Port);
+
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            byte[] messages = new byte[1024];
+
+            socket.Connect(endP);
+
+            socket.Shutdown(SocketShutdown.Both);
+            socket.Close();
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cliente"
         mc:Ignorable="d"
-        Title="Regristro Citas" WindowStartupLocation="CenterScreen" Height="530" Width="390">
+        Title="Regristro Citas" WindowStartupLocation="CenterScreen" Height="530" Width="390" Closing="Close" >
     <Grid x:Name="RegistroP">
         <Grid.RowDefinitions>
             <RowDefinition Height="500"/>
@@ -17,8 +17,8 @@
         <Label Content="Apellidos:" HorizontalAlignment="Left" Margin="33,130,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label Content="Teléfono:" HorizontalAlignment="Left" Margin="33,190,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label Content="Dirección:" HorizontalAlignment="Left" Margin="33,250,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Content="FechaCita:" HorizontalAlignment="Left" Margin="33,310,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label Content="HoraCita:" HorizontalAlignment="Left" Margin="33,370,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Fecha de cita:" HorizontalAlignment="Left" Margin="33,310,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Hora de cita:" HorizontalAlignment="Left" Margin="33,370,0,0" VerticalAlignment="Top" FontSize="16"/>
 
         <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Text="0" Margin="33,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" FontSize="14"/>
         <TextBox x:Name="NombreTextBox" HorizontalAlignment="Left" Margin="33,100,0,0"  Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" FontSize="14"/>
