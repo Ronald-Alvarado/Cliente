@@ -109,7 +109,7 @@ namespace Cliente
 
                 dato += Encoding.UTF8.GetString(messages, 0, Byte);
 
-                if (dato != null)
+                if (!dato.Contains("null"))
                 {
                     cita = JsonConvert.DeserializeObject<Citas>(dato);
 
