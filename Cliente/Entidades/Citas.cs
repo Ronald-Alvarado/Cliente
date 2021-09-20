@@ -7,7 +7,7 @@ namespace Cliente.Entidades
 {
     public class Citas
     {
-        public int CitasId { get; set; }
+        public int CitaId { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string Telefono { get; set; }
@@ -18,7 +18,7 @@ namespace Cliente.Entidades
 
         public Citas()
         {
-            CitasId = 0;
+            CitaId = 0;
             Nombres = string.Empty;
             Apellidos = string.Empty;
             Telefono = string.Empty;

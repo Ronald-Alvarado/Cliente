@@ -12,12 +12,12 @@
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 
                 <Label FontSize="14">IP Servidor:</Label>
-                <TextBox FontSize="16" Margin="45,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  x:Name="ServerIpTextBox" Width="200"></TextBox>
+                <TextBox FontSize="16" Margin="45,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  x:Name="ServerIpTextBox" Width="200" Text="25.4.175.48"></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <Label FontSize="14">Puerto:</Label>
-                <TextBox FontSize="16" Margin="70,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="PortTextBox" Width="200"></TextBox>
+                <TextBox FontSize="16" Margin="70,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" x:Name="PortTextBox" Width="200" Text="8080"></TextBox>
             </StackPanel>
 
             

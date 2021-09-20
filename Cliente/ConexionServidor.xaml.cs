@@ -87,7 +87,7 @@ namespace Cliente
 
                 bytemessages = socket.Receive(messages);
 
-                String mensajeRecibido = Encoding.UTF8.GetString(messages, 0, bytemessages);
+                string mensajeRecibido = Encoding.UTF8.GetString(messages, 0, bytemessages);
 
                 MessageBox.Show(mensajeRecibido);
     
@@ -101,7 +101,7 @@ namespace Cliente
 
                 //25.4.175.48
 
-                socket.Shutdown(SocketShutdown.Both);
+               socket.Shutdown(SocketShutdown.Both);
 
                 socket.Close();
             }

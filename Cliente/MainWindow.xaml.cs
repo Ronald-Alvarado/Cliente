@@ -33,14 +33,14 @@ namespace Cliente
             InitializeComponent();
             IpServidor = ServerIp;
             Port = port;
-
+            CenterWindowOnScreen();
         }
 
         public Citas LlenaClase()
         {
             Citas cita = new Citas();
 
-            cita.CitasId = Convert.ToInt32(IdTextBox.Text);
+            cita.CitaId = Convert.ToInt32(IdTextBox.Text);
             cita.Nombres = NombreTextBox.Text;
             cita.Apellidos = ApellidoTextBox.Text;
             cita.Telefono = TelefonoTextBox.Text;
@@ -53,22 +53,13 @@ namespace Cliente
 
         public void LlenaCampo(Citas cita)
         {
-            IdTextBox.Text = Convert.ToString(cita.CitasId);
+            IdTextBox.Text = Convert.ToString(cita.CitaId);
             NombreTextBox.Text = cita.Nombres;
             ApellidoTextBox.Text = cita.Apellidos;
             TelefonoTextBox.Text = cita.Telefono;
             DireccionTextBox.Text = cita.Direccion;
             FechaCitaTextBox.SelectedDate = cita.FechaCita;
             HoraCitaTextBox.Text = cita.HoraCita;
-        }
-
-        public MainWindow()
-        {
-            InitializeComponent();
-            CenterWindowOnScreen();
-
-            IdTextBox.Text = "0";
-            FechaCitaTextBox.SelectedDate = DateTime.Now;
         }
 
         private void CenterWindowOnScreen()
@@ -92,7 +83,7 @@ namespace Cliente
 
             socket.Connect(endP);
 
-            messages = Encoding.UTF8.GetBytes("Hola, vine a buscar un cliente .....");
+            messages = Encoding.UTF8.GetBytes("Buscar");
 
             socket.Send(messages);
 
@@ -100,8 +91,9 @@ namespace Cliente
             messages = new byte[1024];
             bytemessages = socket.Receive(messages);
 
-            String mensajeRecibido = Encoding.UTF8.GetString(messages, 0, bytemessages);
-            if (mensajeRecibido.Contains("aceptada"))
+            string mensajeRecibido = Encoding.UTF8.GetString(messages, 0, bytemessages);
+
+           if (mensajeRecibido.Contains("aceptada"))
             {
                 messages = new byte[1024];
                 messages = Encoding.UTF8.GetBytes(IdTextBox.Text);
@@ -120,8 +112,13 @@ namespace Cliente
                 cita = JsonConvert.DeserializeObject<Citas>(dato);
 
                 LlenaCampo(cita);
-            }
 
+                socket.Shutdown(SocketShutdown.Both);
+                socket.Close();
+
+                IdTextBox.IsEnabled = false;
+            }
+          
         }
 
         private void BtnNuevo_Click(object sender, RoutedEventArgs e)
@@ -133,10 +130,45 @@ namespace Cliente
             DireccionTextBox.Text = String.Empty;
             FechaCitaTextBox.SelectedDate = DateTime.Now;
             HoraCitaTextBox.Text = String.Empty;
+
+            IdTextBox.IsEnabled = true;
         }
 
-        public void Modificar(int id){
-            
+        public void Modificar()
+        {
+            Citas citas;
+            citas = LlenaClase();
+
+            IPEndPoint endP = new IPEndPoint(IPAddress.Parse(IpServidor), Port);
+
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            byte[] messages = new byte[1024];
+
+            socket.Connect(endP);
+
+            messages = Encoding.UTF8.GetBytes("Guardar");
+
+            socket.Send(messages);
+
+            int bytemessages = 0;
+            messages = new byte[1024];
+            bytemessages = socket.Receive(messages);
+            String mensajeRecibido = Encoding.UTF8.GetString(messages, 0, bytemessages);
+            if (mensajeRecibido.Contains("aceptada"))
+            {
+                string output = JsonConvert.SerializeObject(citas);
+                messages = Encoding.UTF8.GetBytes(output);
+                bytemessages = socket.Send(messages);
+
+                int bytes = 0;
+                messages = new byte[1024];
+                bytes = socket.Receive(messages);
+
+                string mensaje = Encoding.UTF8.GetString(messages, 0, bytes);
+                MessageBox.Show(mensaje, "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
         }
 
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
@@ -157,7 +189,7 @@ namespace Cliente
 
                 socket.Connect(endP);
 
-                messages = Encoding.UTF8.GetBytes("Hola, vine a guardar un cliente .....");
+                messages = Encoding.UTF8.GetBytes("Guardar");
 
                 socket.Send(messages);
 
@@ -170,6 +202,14 @@ namespace Cliente
                     string output = JsonConvert.SerializeObject(citas);
                     messages = Encoding.UTF8.GetBytes(output);
                     bytemessages = socket.Send(messages);
+
+                    int bytes = 0;
+                    messages = new byte[1024];
+                    bytes = socket.Receive(messages);
+
+                    string mensaje = Encoding.UTF8.GetString(messages, 0, bytes);
+                    MessageBox.Show(mensaje, "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 }                
             }
 
@@ -177,7 +217,7 @@ namespace Cliente
             {
                 if (citas != null)
                 {
-                    Modificar(Convert.ToInt32(IdTextBox.Text));
+                    Modificar();
                 }
                 
             }

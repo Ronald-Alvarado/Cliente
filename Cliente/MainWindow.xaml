@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cliente"
         mc:Ignorable="d"
-        Title="MainWindow" Height="530" Width="390">
+        Title="Regristro Citas" WindowStartupLocation="CenterScreen" Height="530" Width="390">
     <Grid x:Name="RegistroP">
         <Grid.RowDefinitions>
             <RowDefinition Height="500"/>
